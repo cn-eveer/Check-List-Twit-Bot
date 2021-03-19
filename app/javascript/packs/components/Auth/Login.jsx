@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { AiOutlineLock } from "react-icons/ai";
 import { toast, Zoom } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { logInAction } from "../redux/action";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -21,31 +23,45 @@ const login = () => {
 };
 
 function Login() {
-  const classes = useStyles();
-  const userLogin = () => {
-    console.log("aaaaa");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  const classes = useStyles();
   return (
     <div className={classes.wrapper}>
       <h1 className={classes.title}>Schedule Chat</h1>
       <form>
         <div className={classes.iconbar}>
           <IoPersonCircleOutline className={classes.icon} />
-          <input type="text" placeholder="Username" />
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={handleNameChange}
+          />
         </div>
         <div className={classes.iconbar}>
           <AiOutlineLock className={classes.icon} />
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={handlePasswordChange}
+          />
         </div>
-        <Link to="/main">
-          <p
-            onClick={() => {
-              userLogin();
-            }}
-          >
-            LOG IN
-          </p>
-        </Link>
+        <p
+          onClick={() =>
+            dispatch(logInAction({ name: name, password: password }))
+          }
+        >
+          LOG IN
+        </p>
         <Link to="/signin">
           <span className={classes.span}>Create your account?</span>
         </Link>

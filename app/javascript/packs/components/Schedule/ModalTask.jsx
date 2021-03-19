@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
 import styled from "styled-components";
 
 const Background = styled.div`
@@ -7,7 +8,6 @@ const Background = styled.div`
   background: rgba(0, 0, 0, 0.8);
   top: 50%;
   left: 50%;
-  /* padding: "60px 30px", */
   position: absolute;
   transform: translate(-50%, -50%);
   position: fixed;
@@ -39,6 +39,7 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* text-align: center; */
   align-items: center;
   line-height: 1.8;
   color: #141414;
@@ -53,44 +54,112 @@ const ModalContent = styled.div`
   }
 `;
 
-// const CloseModalButton = styled(MdClose)`
 const CloseModalButton = styled.button`
   cursor: pointer;
   position: absolute;
+  font-size: 30px;
   top: 20px;
   right: 20px;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 27px;
   padding: 0;
   z-index: 10;
+  border: none;
+  /* background-color: ; */
 `;
+
+const TextInput = styled.input`
+  margin-top: 20px;
+  width: 80%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #7e7c7c;
+  outline: none;
+  //   color: "#ccc",
+  font-size: 20px;
+  align-items: center;
+`;
+const TimeWrapper = styled.div`
+  margin: 30px 0;
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+`;
+
+const Time = styled.div`
+  width: 100px;
+`;
+const TimeInput = styled.input`
+  width: 150px;
+  font-size: 25px;
+`;
+
 function ModalTask({ open, setOpen }) {
+  const date1 = new Date();
+  const h = date1.getHours();
+  const m = date1.getMinutes();
+  const fH = h + 1;
+  const [sTime, setSTime] = useState(`${h}:${m}`);
+  const [fTime, setFTime] = useState(`${fH}:${m}`);
+  const [title, setTitle] = useState("");
+
+  const handleSTimeChange = (e) => {
+    console.log(e.target.value);
+    setSTime(e.target.value);
+  };
+  const handleFTimeChange = (e) => {
+    console.log(e.target.value);
+    setFTime(e.target.value);
+  };
+  const handleTitleChange = (e) => {
+    console.log(e.target.value);
+    setTitle(e.target.value);
+  };
   return (
     <>
       {open && (
-        // <div>
-        //   <form>
-        //     <input type="text" placeholder="task ..." />
-        //     <input type="number" name="start-h" id="start-h" />:
-        //     <input type="number" name="start-m" id="start-m" />
-        //     <input type="number" name="finish-h" id="finish-h" />:
-        //     <input type="number" name="finish-m" id="finish-m" />
-        //   </form>
-        //   <button onClick={() => setOpen(false)}>Close Modal</button>
-        // </div>
-        <Background onClick={() => setOpen(false)}>
-          {/* <animated.div style={animation}> */}
+        <Background>
           <ModalWrapper>
-            {/* <ModalImg src={require('./modal.jpg')} alt='camera' /> */}
             <ModalContent>
-              <h1>Are you ready?</h1>
-              <p>Get exclusive access to our next launch.</p>
-              <button>Join Now</button>
+              <h1>Add Task !!</h1>
+              <TextInput
+                onChange={handleTitleChange}
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Task Name..."
+              />
+              <TimeWrapper>
+                <Time>
+                  <p>start time</p>
+                  <TimeInput
+                    onChange={handleSTimeChange}
+                    type="time"
+                    name="start"
+                    id="start"
+                    // value={`${h}:${m}`}
+                    value={sTime}
+                  />
+                </Time>
+                <Time>
+                  <p>finish time</p>
+                  <TimeInput
+                    onChange={handleFTimeChange}
+                    type="time"
+                    name="finish"
+                    id="finish"
+                    value={fTime}
+                  />
+                </Time>
+              </TimeWrapper>
+              <button onClick={() => setOpen(false)}>Add</button>
             </ModalContent>
             <CloseModalButton
               aria-label="Close modal"
               onClick={() => setOpen(false)}
-            />
+            >
+              <AiFillCloseCircle />
+            </CloseModalButton>
           </ModalWrapper>
           {/* </animated.div> */}
         </Background>

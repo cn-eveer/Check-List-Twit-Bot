@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+// import { push } from "connected-react-router";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { AiOutlineLock } from "react-icons/ai";
+import { AiOutlineMail } from "react-icons/ai";
 import { toast, Zoom } from "react-toastify";
+import { signInAction } from "../redux/action";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -20,6 +24,20 @@ const login = () => {
   notify();
 };
 function Login() {
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleNameChange = (e) => {
+    setUserName(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setUserEmail(e.target.value);
+  };
+  const handlePasswordChange = (e) => {
+    setUserPassword(e.target.value);
+  };
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
@@ -27,19 +45,40 @@ function Login() {
       <form>
         <div className={classes.iconbar}>
           <IoPersonCircleOutline className={classes.icon} />
-          <input type="text" placeholder="Username" />
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={handleNameChange}
+          />
+        </div>
+        <div className={classes.iconbar}>
+          <AiOutlineMail className={classes.icon} />
+          <input type="text" placeholder="Email" onChange={handleEmailChange} />
         </div>
         <div className={classes.iconbar}>
           <AiOutlineLock className={classes.icon} />
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={handlePasswordChange}
+          />
         </div>
-        <div className={classes.iconbar}>
-          <AiOutlineLock className={classes.icon} />
-          <input type="password" placeholder="Once again password" />
-        </div>
-        <Link to="/main">
-          <p onClick={() => login()}>SIGN IN</p>
-        </Link>
+
+        <p
+          onClick={() => {
+            login();
+            dispatch(
+              signInAction({
+                name: userName,
+                email: userEmail,
+                password: userPassword,
+              })
+            );
+          }}
+        >
+          SIGN IN
+        </p>
+
         <Link to="/">
           <span className={classes.span}>Back to page.</span>
         </Link>
