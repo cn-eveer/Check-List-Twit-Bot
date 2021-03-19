@@ -20,7 +20,17 @@ ActiveRecord::Schema.define(version: 2021_03_20_054817) do
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "checklists", charset: "utf8mb4", force: :cascade do |t|
+    t.text "title"
+    t.text "detail"
+    t.string "username"
+    t.boolean "if_finish", default: false
+    t.datetime "finish_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password_digest"
