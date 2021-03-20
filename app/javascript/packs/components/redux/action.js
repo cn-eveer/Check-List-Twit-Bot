@@ -29,7 +29,7 @@ export const signOutAction = () => {
   console.log("signout");
   return {
     type: SIGNOUT,
-    playload: {
+    payload: {
       name: "",
       email: "",
       password: "",

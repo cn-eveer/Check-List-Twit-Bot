@@ -85,13 +85,28 @@ export const signin = (userName, userEmail, userPassword, confirm) => {
     }
   };
 };
+// export const signout = async () => {
+//   await axios
+//     .delete("api/v1/logout", { withCredentials: true })
+//     .then((res) => {
+//       signOutAction();
+//       LogSuccess();
+//       dispatch(push("/"));
+//     })
+//     .catch((error) => {
+//       console.log("logout error", error);
+//       LogError();
+//     });
+// };
 
 export const login = (userEmail, userPassword) => {
   return async (dispatch, getState) => {
-    const state = getState();
-    const isSignedIn = state.userAuth.isSignedIn;
+    let state = getState();
+    let isSignedIn = state.userAuth.isSignedIn;
+    console.log(isSignedIn);
+    console.log(state.userAuth.isSignedIn);
+    console.log(state.userAuth);
     if (!isSignedIn) {
-      // console.log(userName),
       await axios
         .post(
           "api/v1/sessions",
@@ -107,11 +122,14 @@ export const login = (userEmail, userPassword) => {
           if (res.data.logged_in) {
             dispatch(
               logInAction({
-                email: userEmail,
-                password: userPassword,
+                email: res.data.user.email,
+                password: "res.data.user.password_digest",
                 isSignedIn: true,
               })
             );
+            let state = getState();
+            console.log(state.userAuth);
+            console.log(state.userAuth.isSignedIn);
             dispatch(push("/main"));
             dispatch(loginSuccess);
           }

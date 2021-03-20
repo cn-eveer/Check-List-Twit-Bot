@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { toast, Zoom } from "react-toastify";
 import { signOutAction } from "../redux/action";
+import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -54,10 +55,18 @@ const useStyles = makeStyles(() => ({
 function Header() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const signout = () => {
-    dispatch(signOutAction());
-    LogSuccess();
-    dispatch(push("/"));
+  const signout = async () => {
+    await axios
+      .delete("api/v1/logout", { withCredentials: true })
+      .then((res) => {
+        dispatch(signOutAction());
+        LogSuccess();
+        dispatch(push("/"));
+      })
+      .catch((error) => {
+        console.log("logout error", error);
+        LogError();
+      });
   };
   return (
     <div className={classes.headerWrapper}>
