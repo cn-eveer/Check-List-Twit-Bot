@@ -1,15 +1,19 @@
-<!--
-<%  @tweets.each do |tweet| %>
-<div class="">
-  <%= tweet.text %>
-</div>
+
+
+<%  @items.each do |checklist| %>
+  <div><%= checklist.username %></div>
 <% end %>
--->
-<h1><%= @current_user.username %>さん、終わりましたか？？？？</h1>
+
 
 <%= form_for @tweet do |f| %>
   <%= f.text_area :text, cols: 40, rows: 5 ,maxlength: 140 %>
   <%= f.submit '保存' %>
 <% end %>
+
+
+
+
+
+<h1><%= @current_user.username %>さん、終わりましたか？？？？</h1>
 <%= link_to "YES", congrats_tweets_path %>
 <button type="submit"><%= link_to 'NO(ツイート)', post_tweets_path %></button>

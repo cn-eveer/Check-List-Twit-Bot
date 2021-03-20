@@ -1,5 +1,5 @@
 class Checklist < ApplicationRecord
+  #belongs_to :user
   has_many :users
-
-  validates :username, :finish_at, presence: true
+  validates :username, presence: true
 end

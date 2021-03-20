@@ -4,4 +4,5 @@ class User < ApplicationRecord
   validates_uniqueness_of :email
   validates :username, uniqueness: { case_sensitive: true }
   has_many :tweets
+  has_many :checklists
 end

@@ -12,18 +12,29 @@ class TweetsController < ApplicationController
   end
 
   def new
-    @tweets = @current_user.tweets.all
+    @items = Checklist.all
+    current_name = @current_user[:username]
+    if Checklist.find_by(username: current_name).present?
+      @tweets = Checklist.where(username: current_name)
+      p "#{@tweets} new"
+    end
+    #@tweets = @current_user.tweets.all
     @tweet = @current_user.tweets.new
   end
 
-  def create
-    @current_user.tweets.create(create_params)
-    redirect_back(fallback_location: new_tweet_path)
-  end
+  #def create
+    #@current_user.tweets.create(create_params)これもいらない
+    #redirect_back(fallback_location: new_tweet_path)
+  #end
 
   def post
-    tweet = @current_user.tweets.order(id: :desc).first
-    status = "【#{tweet.user.username}】さんが『#{tweet.text}』を達成できませんでした。"
+    #Checklistのusernameがcurrent_userの中からfirstをツイートする。
+    p @current_user[:username]
+    tweet = Checklist.find_by(username: @current_user[:username])
+    p "#{tweet }post"
+    status = "【#{tweet.username}】さんが『#{tweet.title}』を達成できませんでした。"
+    #tweet = @current_user.tweets.order(id: :desc).first
+    #status = "【#{tweet.user.username}】さんが『#{tweet.text}』を達成できませんでした。"
     @client.update(status)
   end
 
