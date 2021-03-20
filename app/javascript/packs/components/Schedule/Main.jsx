@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import { makeStyles } from "@material-ui/core";
 import Input from "./Input";
 import ChatButton from "./ChatButton";
 import TaskList from "./TaskList";
-import ModalTask from "./ModalTask";
+import ModalTask from "./ModalTask"
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import EditTask from "./EditTask";
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -32,16 +34,27 @@ function Main() {
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const classes = useStyles();
+  const [items,setItems] = useState([]);
+
+  useEffect(() => {
+    axios.get('api/v1/bot.json')
+      .then(resp => {
+        console.log(resp.data);
+        setItems(resp.data);
+      }).catch(e => {
+        console.log(e);
+      })
+  }, [])
+    
   return (
     <>
       <div className={classes.wrapper}>
         <Header />
         <Input setOpen={setOpen} />
         <TaskList setEditOpen={setEditOpen} />
-        <ChatButton />
+        <ChatButton items={items}/>
       </div>
       <ModalTask open={open} setOpen={setOpen} />
-      <EditTask editOpen={editOpen} setEditOpen={setEditOpen} />
     </>
   );
 }
