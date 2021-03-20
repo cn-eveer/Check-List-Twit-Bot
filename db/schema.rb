@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_185107) do
+ActiveRecord::Schema.define(version: 2021_03_20_054817) do
+
+  create_table "tweets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_tweets_on_user_id"
+  end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "username"
@@ -20,4 +28,5 @@ ActiveRecord::Schema.define(version: 2021_03_16_185107) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "tweets", "users"
 end
