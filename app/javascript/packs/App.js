@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Login from "./components/Auth/Login";
@@ -24,15 +24,15 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/signin" component={Signin} />
           {isSignedIn ? (
-            <div>
+            <Fragment>
               <Route exact path="/chat" component={Chat} />
               <Route exact path="/main" component={Main} />
-            </div>
+            </Fragment>
           ) : (
-            <div>
+            <Fragment>
               <Route exact path="/chat" component={loginError} />
               <Route exact path="/main" component={loginError} />
-            </div>
+            </Fragment>
           )}
         </Switch>
       </Wrapper>

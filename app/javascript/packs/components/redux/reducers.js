@@ -17,7 +17,10 @@ export const userAuth = (state = initialState, action) => {
         ...action.payload,
       };
     case SIGNOUT:
-      return initialState;
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }

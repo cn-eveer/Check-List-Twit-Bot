@@ -51,8 +51,6 @@ export const signin = (userName, userEmail, userPassword, confirm) => {
     const isSignedIn = state.userAuth.isSignedIn;
     if (!isSignedIn) {
       console.log(userName),
-        console.log(userPassword),
-        console.log(userEmail),
         await axios
           .post(
             "api/v1/user",
@@ -82,7 +80,6 @@ export const signin = (userName, userEmail, userPassword, confirm) => {
             }
           })
           .catch((error) => {
-            console.log("registration error", error);
             dispatch(signinError);
           });
     }
@@ -95,37 +92,33 @@ export const login = (userEmail, userPassword) => {
     const isSignedIn = state.userAuth.isSignedIn;
     if (!isSignedIn) {
       // console.log(userName),
-      console.log(userPassword),
-        console.log(userEmail),
-        await axios
-          .post(
-            "api/v1/sessions",
-            {
-              session: {
+      await axios
+        .post(
+          "api/v1/sessions",
+          {
+            session: {
+              email: userEmail,
+              password: userPassword,
+            },
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          if (res.data.logged_in) {
+            dispatch(
+              logInAction({
                 email: userEmail,
                 password: userPassword,
-              },
-            },
-            { withCredentials: true }
-          )
-          .then((res) => {
-            if (res.data.logged_in) {
-              console.log("insert");
-              dispatch(
-                logInAction({
-                  email: userEmail,
-                  password: userPassword,
-                  isSignedIn: true,
-                })
-              );
-              dispatch(push("/main"));
-              dispatch(loginSuccess);
-            }
-          })
-          .catch((error) => {
-            console.log("registration error", error);
-            dispatch(loginError);
-          });
+                isSignedIn: true,
+              })
+            );
+            dispatch(push("/main"));
+            dispatch(loginSuccess);
+          }
+        })
+        .catch((error) => {
+          dispatch(loginError);
+        });
     }
   };
 };

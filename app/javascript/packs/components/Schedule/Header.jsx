@@ -1,14 +1,24 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 import { BiLogOut } from "react-icons/bi";
 import { makeStyles } from "@material-ui/core";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { Link } from "react-router-dom";
 import { toast, Zoom } from "react-toastify";
+import { signOutAction } from "../redux/action";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
-const notify = () => {
+const LogSuccess = () => {
   toast.success("Successfully Logout!!!", {
+    hideProgressBar: true,
+    transition: Zoom,
+    draggable: true,
+    position: toast.POSITION.TOP_CENTER,
+  });
+};
+const LogError = () => {
+  toast.error("Error Logout!!!", {
     hideProgressBar: true,
     transition: Zoom,
     draggable: true,
@@ -40,16 +50,19 @@ const useStyles = makeStyles(() => ({
     marginRight: "5px",
   },
 }));
-const logout = () => {
-  notify();
-};
+
 function Header() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const signout = () => {
+    dispatch(signOutAction());
+    LogSuccess();
+    dispatch(push("/"));
+  };
   return (
     <div className={classes.headerWrapper}>
-      <Link to="/">
-        <BiLogOut className={classes.backIcon} onClick={() => logout()} />
-      </Link>
+      <BiLogOut className={classes.backIcon} onClick={() => signout()} />
+
       <h1 className={classes.title}>Schedule List</h1>
       <HiMenuAlt3 className={classes.menuIcon} />
     </div>

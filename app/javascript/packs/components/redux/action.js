@@ -15,7 +15,6 @@ export const signInAction = (useState) => {
 };
 
 export const logInAction = (useState) => {
-  console.log("login", useState.email);
   return {
     type: LOGIN,
     payload: {
@@ -27,6 +26,7 @@ export const logInAction = (useState) => {
 };
 
 export const signOutAction = () => {
+  console.log("signout");
   return {
     type: SIGNOUT,
     playload: {
