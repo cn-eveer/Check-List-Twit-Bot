@@ -31,7 +31,7 @@ function Header() {
   const classes = useStyles();
   return (
     <div className={classes.headerWrapper}>
-      <Link to="/main">
+      <Link to="/checklist">
         <IoMdArrowRoundBack className={classes.backIcon} />
       </Link>
       <h1 className={classes.title}>Schedule Chat</h1>

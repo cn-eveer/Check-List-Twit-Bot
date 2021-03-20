@@ -75,7 +75,7 @@ export const signin = (userName, userEmail, userPassword, confirm) => {
                   isSignedIn: true,
                 })
               );
-              dispatch(push("/main"));
+              dispatch(push("/checklist"));
               dispatch(sininSuccess);
             }
           })
@@ -130,7 +130,7 @@ export const login = (userEmail, userPassword) => {
             let state = getState();
             console.log(state.userAuth);
             console.log(state.userAuth.isSignedIn);
-            dispatch(push("/main"));
+            dispatch(push("/checklist"));
             dispatch(loginSuccess);
           }
         })

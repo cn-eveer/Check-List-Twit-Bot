@@ -25,12 +25,12 @@ function App() {
           {isSignedIn ? (
             <Fragment>
               <Route exact path="/chat" component={Chat} />
-              <Route exact path="/main" component={Main} />
+              <Route exact path="/checklist" component={Main} />
             </Fragment>
           ) : (
             <Fragment>
               <Route exact path="/chat" component={loginError} />
-              <Route exact path="/main" component={loginError} />
+              <Route exact path="/checklist" component={loginError} />
             </Fragment>
           )}
         </Switch>
