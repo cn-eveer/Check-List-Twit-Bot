@@ -36,7 +36,7 @@ function Login() {
           />
         </div>
         <p onClick={() => dispatch(login(email, password))}>LOG IN</p>
-        <Link to="/signin">
+        <Link to="/signup">
           <span className={classes.span}>Create your account?</span>
         </Link>
       </form>

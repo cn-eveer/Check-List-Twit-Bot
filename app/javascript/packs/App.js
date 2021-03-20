@@ -16,13 +16,12 @@ const Wrapper = styled.div`
 
 function App() {
   const isSignedIn = useSelector((state) => state.userAuth.isSignedIn);
-
   return (
     <>
       <Wrapper>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route exact path="/signin" component={Signin} />
+          <Route exact path="/signup" component={Signin} />
           {isSignedIn ? (
             <Fragment>
               <Route exact path="/chat" component={Chat} />
