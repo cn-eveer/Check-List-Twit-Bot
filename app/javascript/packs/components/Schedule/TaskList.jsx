@@ -6,15 +6,14 @@ const useStyles = makeStyles(() => ({
     height: "380px",
     margin: "30px auto",
     zIndex: 1,
-    overflow: "scroll",
     scrollbarColor: "#d3d3d3 #fff",
   },
 }));
-function TaskList({ setEditOpen }) {
+function TaskList({ setEditOpen, updateList, setUpdateList }) {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
-      <Todo setEditOpen={setEditOpen} />
+      <Todo setEditOpen={setEditOpen} updateList={updateList} setUpdateList={setUpdateList}/>
     </div>
   );
 }

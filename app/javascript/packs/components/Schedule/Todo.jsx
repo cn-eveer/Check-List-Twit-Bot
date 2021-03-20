@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
+import { useSelector } from "react-redux"
 import { AiFillEdit } from "react-icons/ai";
 import CheckBox from "react-animated-checkbox";
 const Div = styled.div`
@@ -30,75 +32,38 @@ const Edit = styled.div`
 `;
 
 function Todo({ setEditOpen }) {
-  const [checked, setChecked] = useState(false);
-  const handleClickChange = () => {
-    setChecked(!checked);
-  };
-  const openModal = () => {
-    setEditOpen((prev) => !prev);
-  };
+  const isSignedIn = useSelector((state) => state.userAuth.isSignedIn);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    axios.get('api/v1/checklists.json')
+    .then(resp => {
+      console.log(resp.data);
+      setItems(resp.data);
+    })
+    .catch(e => {
+      console.log(e);
+    })
+  }, [])
+
   return (
     <>
-      <Div>
-        {/* <CheckBox  /> */}
-        <CheckBox
-          checked={checked}
-          checkBoxStyle={{
-            checkedColor: "#34b93d",
-            size: 25,
-            unCheckedColor: "#b8b8b8",
-            marginRight: "100px",
-            height: "26px",
-          }}
-          duration={100}
-          onClick={handleClickChange}
-        />
-
-        <P>aaaaaaa</P>
-        <Edit>
-          <AiFillEdit onClick={openModal} />
-        </Edit>
-      </Div>
-      <Div>
-        {/* <CheckBox  /> */}
-        <CheckBox
-          checked={checked}
-          checkBoxStyle={{
-            checkedColor: "#34b93d",
-            size: 25,
-            unCheckedColor: "#b8b8b8",
-            marginRight: "100px",
-            height: "26px",
-          }}
-          duration={100}
-          onClick={handleClickChange}
-        />
-
-        <P>aaaaaaaaaaaaaaaaaaa</P>
-        <Edit>
-          <AiFillEdit />
-        </Edit>
-      </Div>
-      <Div>
-        {/* <CheckBox  /> */}
-        <CheckBox
-          checked={checked}
-          checkBoxStyle={{
-            checkedColor: "#34b93d",
-            size: 25,
-            unCheckedColor: "#b8b8b8",
-            marginRight: "100px",
-            height: "26px",
-          }}
-          duration={100}
-          onClick={handleClickChange}
-        />
-
-        <P>aaaaaaa a</P>
-        <Edit>
-          <AiFillEdit />
-        </Edit>
-      </Div>
+      {items.map((item) =>
+        <Div>
+          <CheckBox
+            checked={item.if_finish}
+            checkBoxStyle={{
+              checkedColor: "#34b93d",
+              size: 25,
+              unCheckedColor: "#b8b8b8",
+              marginRight: "100px",
+              height: "26px",
+            }}
+            duration={100}
+          />
+          <P>{item.title}</P>
+        </Div>
+      )}
     </>
   );
 }

@@ -3,6 +3,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import styled from "styled-components";
 import { toast, Zoom } from "react-toastify";
 import { motion } from "framer-motion";
+import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -164,8 +165,29 @@ function ModalTask({ open, setOpen }) {
       OverError();
     } else {
       setOpen(false);
+      submitTask({ title: title, date: date, time: time });
     }
   };
+
+  const submitTask = ({ title, date, time }) => {
+    console.log(title,date+time);
+    axios
+      .post(
+        "/api/v1/checklists",
+        {
+          checklist: {
+            title: title,
+            username: "username",
+            finish_at: date+' '+time
+          }
+        }
+      ).then(response => {
+          console.log("Success",date,time);
+      }).catch(error => {
+          console.log("Add Error", error);
+      });
+  };
+
   return (
     <>
       {open && (
@@ -218,9 +240,9 @@ function ModalTask({ open, setOpen }) {
               {/* </TimeWrapper> */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
-                onClick={() =>
-                  confirmTask({ title: title, date: taskDate, time: fTime })
-                }
+                onClick={() => {
+                  confirmTask({ title: title, date: taskDate, time: fTime });
+                }}
               >
                 Add Task !!!
               </motion.button>
