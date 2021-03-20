@@ -137,7 +137,7 @@ const TimeInput = styled.input`
   outline: none;
 `;
 
-function ModalTask({ open, setOpen }) {
+function EditTask({ editOpen, setEditOpen }) {
   const [taskDate, setTaskDate] = useState("");
   const [fTime, setFTime] = useState("");
   const [title, setTitle] = useState("");
@@ -162,16 +162,16 @@ function ModalTask({ open, setOpen }) {
     } else if (count > 20) {
       OverError();
     } else {
-      setOpen(false);
+      setEditOpen(false);
     }
   };
   return (
     <>
-      {open && (
+      {editOpen && (
         <Background>
           <ModalWrapper>
             <ModalContent>
-              <TaskTitle>Schedule</TaskTitle>
+              <TaskTitle>Edit Schedule</TaskTitle>
               <TextInput
                 onChange={(e) => {
                   handleTitleChange(e);
@@ -218,7 +218,7 @@ function ModalTask({ open, setOpen }) {
             </ModalContent>
             <CloseModalButton
               aria-label="Close modal"
-              onClick={() => setOpen(false)}
+              onClick={() => setEditOpen(false)}
             >
               <AiFillCloseCircle />
             </CloseModalButton>
@@ -230,4 +230,4 @@ function ModalTask({ open, setOpen }) {
   );
 }
 
-export default ModalTask;
+export default EditTask;

@@ -5,7 +5,7 @@ import Input from "./Input";
 import ChatButton from "./ChatButton";
 import TaskList from "./TaskList";
 import ModalTask from "./ModalTask";
-
+import EditTask from "./EditTask";
 const useStyles = makeStyles(() => ({
   wrapper: {
     width: "500px",
@@ -30,16 +30,18 @@ const useStyles = makeStyles(() => ({
 
 function Main() {
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const classes = useStyles();
   return (
     <>
       <div className={classes.wrapper}>
         <Header />
         <Input setOpen={setOpen} />
-        <TaskList />
+        <TaskList setEditOpen={setEditOpen} />
         <ChatButton />
       </div>
       <ModalTask open={open} setOpen={setOpen} />
+      <EditTask editOpen={editOpen} setEditOpen={setEditOpen} />
     </>
   );
 }
