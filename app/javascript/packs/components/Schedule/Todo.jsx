@@ -49,7 +49,7 @@ function Todo({ setEditOpen }) {
   return (
     <>
       {items.map((item) =>
-        <Div>
+        <Div key={item.id}>
           <CheckBox
             checked={item.if_finish}
             checkBoxStyle={{

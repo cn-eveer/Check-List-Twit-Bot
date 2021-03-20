@@ -177,7 +177,6 @@ function ModalTask({ open, setOpen }) {
         {
           checklist: {
             title: title,
-            username: "username",
             finish_at: date+' '+time
           }
         }
