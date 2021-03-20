@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import Session from "./session/session";
+import Checklist from "./checklist/checklist";
 import styled from 'styled-components'
 import axios from "axios";
 import './App.css'
@@ -47,7 +48,7 @@ export default class App extends Component{
     super();
 
     this.state = {
-      loggedInStatus: "LOGGED_IN",
+      loggedInStatus: "NOT_LOGGED_IN",
       user: {}
     };
 
@@ -107,18 +108,40 @@ export default class App extends Component{
           <Logo>
             SAMPLE
           </Logo>
+          <NavItems>
+            <NavItem>
+              <Link to="/">
+                Session
+              </Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/checklist">
+                Checklist
+              </Link>
+            </NavItem>
+          </NavItems>
         </Nabvar>
+
         <Wrapper>
           <Switch>
-            <Route
-              exact
-              path={"/"}
+            <Route exact path={"/"}
               render={props => (
                 <Session
                   {...props}
                   handleLogin={this.handleLogin}
                   handleLogout={this.handleLogout}
                   loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
+           <Route
+              exact
+              path={"/checklist"}
+              render={props => (
+                <Checklist
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                  user={this.state.user}
                 />
               )}
             />
