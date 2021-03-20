@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   root to: 'top#index'
   
-  get   '/login',  to: 'top#index'
-  get   '/logout', to: 'top#index'
-  get   '/signup', to: 'top#index'
+  get   '/main', to: 'top#index'
+  get   '/chat', to: 'top#index'
+
+  get '/logout', to: 'top#index' #   
+  get '/signup', to: 'top#index' # '/signin'
 
   namespace :api do
     namespace :v1 do
