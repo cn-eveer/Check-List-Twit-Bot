@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import styled from "styled-components";
 import { toast, Zoom } from "react-toastify";
+import { motion } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -41,7 +42,7 @@ const TaskTitle = styled.h1`
   font-family: "Caveat", cursive;
 `;
 
-const ModalWrapper = styled.div`
+const ModalWrapper = styled(motion.div)`
   width: 400px;
   height: 600px;
   /* box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2); */
@@ -169,7 +170,14 @@ function EditTask({ editOpen, setEditOpen }) {
     <>
       {editOpen && (
         <Background>
-          <ModalWrapper>
+          <ModalWrapper
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              y: [-100, 30, 0],
+              transition: { duration: 0.4 },
+            }}
+          >
             <ModalContent>
               <TaskTitle>Edit Schedule</TaskTitle>
               <TextInput
@@ -208,13 +216,14 @@ function EditTask({ editOpen, setEditOpen }) {
                 />
               </Time>
               {/* </TimeWrapper> */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
                 onClick={() =>
                   confirmTask({ title: title, date: taskDate, time: fTime })
                 }
               >
                 Add Task !!!
-              </button>
+              </motion.button>
             </ModalContent>
             <CloseModalButton
               aria-label="Close modal"
