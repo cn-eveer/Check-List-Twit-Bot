@@ -21,7 +21,7 @@ function Login() {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
-      <h1 className={classes.title}>Schedule Chat</h1>
+      <h1 className={classes.title}>Schedule Checker</h1>
       <form>
         <div className={classes.iconbar}>
           <AiOutlineMail className={classes.icon} />
@@ -47,7 +47,6 @@ function Login() {
 const useStyles = makeStyles(() => ({
   wrapper: {
     width: "500px",
-    height: "520px",
     color: "#000",
     top: "50%",
     left: "50%",

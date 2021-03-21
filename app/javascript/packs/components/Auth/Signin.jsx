@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { push } from "connected-react-router";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { IoPersonCircleOutline } from "react-icons/io5";
@@ -79,7 +78,6 @@ function Login() {
 const useStyles = makeStyles(() => ({
   wrapper: {
     width: "500px",
-    height: "520px",
     color: "#000",
     top: "50%",
     left: "50%",
@@ -138,7 +136,6 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     marginBottom: "50px",
     borderBottom: "1px solid #ddd",
-    // height: "30px",
     color: "#dadada",
   },
   icon: {
