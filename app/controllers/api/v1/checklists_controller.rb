@@ -3,7 +3,7 @@ class Api::V1::ChecklistsController < ApplicationController
 
   def index
     items = Checklist.where(username: @current_user[:username])
-      .order(updated_at: :desc)
+      .order(finish_at: :desc)
     render json: items
   end
 
