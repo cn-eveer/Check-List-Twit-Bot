@@ -21,7 +21,7 @@ class Api::V1::BotController < ApplicationController
     if params[:item][:id].present? && params[:item][:answer].present?
       tweet = Checklist.find_by(id: params[:item][:id])
       status = "【#{tweet.username}】さんが『#{tweet.title}』を達成できま"
-      if params[:item][:answer]
+      if params[:item][:answer] == "Yes"
         status += "した。"
       else
         status += "せんでした。"
