@@ -1,6 +1,9 @@
 class Api::V1::ChecklistsController < ApplicationController
+  include CurrentUserConcern
+
   def index
-    items = Checklist.order(updated_at: :desc)
+    items = Checklist.where(username: @current_user[:username])
+      .order(updated_at: :desc)
     render json: items
   end
 
@@ -17,7 +20,7 @@ class Api::V1::ChecklistsController < ApplicationController
 
   def checklist_params
     params.require(:checklist).permit(
-      :title, :username, :finish_at
-    )
+      :title, :finish_at, :username
+    ).merge(username: @current_user[:username])
   end
 end
