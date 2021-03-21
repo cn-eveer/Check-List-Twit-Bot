@@ -34,7 +34,7 @@ function Header() {
       <Link to="/checklist">
         <IoMdArrowRoundBack className={classes.backIcon} />
       </Link>
-      <h1 className={classes.title}>Schedule Chat</h1>
+      <h1 className={classes.title}>Oni Bot </h1>
       <HiMenuAlt3 className={classes.menuIcon} />
     </div>
   );

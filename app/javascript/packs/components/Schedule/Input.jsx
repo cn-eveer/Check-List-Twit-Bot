@@ -15,13 +15,8 @@ function Input({ setOpen }) {
       /> */}
       {/* <FaRegStickyNote className={classes.sendIcon} /> */}
       <p className={classes.addButton} onClick={openModal}>
-        Add task ...
+        Add Task
       </p>
-      <select name="fillter" className={classes.filter}>
-        <option value="all">All</option>
-        <option value="complete">Complete</option>
-        <option value="uncomplete">Uncomplete</option>
-      </select>
     </div>
   );
 }

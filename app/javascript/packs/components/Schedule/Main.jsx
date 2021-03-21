@@ -11,7 +11,6 @@ import EditTask from "./EditTask";
 const useStyles = makeStyles(() => ({
   wrapper: {
     width: "500px",
-    height: "700px",
     color: "#000",
     top: "50%",
     left: "50%",
