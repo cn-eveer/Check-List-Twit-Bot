@@ -73,7 +73,7 @@ function ChatItem({ item, option }) {
           {
             item: {
               id: item.id,
-              answer: true,
+              answer: option,
             }
           }
       ).then(resp => {
