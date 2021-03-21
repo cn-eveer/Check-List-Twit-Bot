@@ -72,7 +72,7 @@ function Header() {
     <div className={classes.headerWrapper}>
       <BiLogOut className={classes.backIcon} onClick={() => signout()} />
 
-      <h1 className={classes.title}>Schedule List</h1>
+      <h1 className={classes.title}>Task List</h1>
       <HiMenuAlt3 className={classes.menuIcon} />
     </div>
   );

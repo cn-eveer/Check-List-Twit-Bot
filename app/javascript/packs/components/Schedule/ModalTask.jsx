@@ -200,7 +200,7 @@ function ModalTask({ open, setOpen }) {
             }}
           >
             <ModalContent>
-              <TaskTitle>Schedule</TaskTitle>
+              <TaskTitle>New Task</TaskTitle>
               <TextInput
                 onChange={(e) => {
                   handleTitleChange(e);
@@ -243,7 +243,7 @@ function ModalTask({ open, setOpen }) {
                   confirmTask({ title: title, date: taskDate, time: fTime });
                 }}
               >
-                Add Task !!!
+                Add to List
               </motion.button>
             </ModalContent>
             <CloseModalButton
