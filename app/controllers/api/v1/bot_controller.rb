@@ -1,6 +1,6 @@
 class Api::V1::BotController < ApplicationController
-  #include BotConcern
   include CurrentUserConcern
+  before_action :set_bot, except: :new
 
   def index
     items = []
@@ -17,7 +17,7 @@ class Api::V1::BotController < ApplicationController
     render json: items
   end
 
-  def post    
+  def create    
     if params[:item][:id].present? && params[:item][:answer].present?
       tweet = Checklist.find_by(id: params[:item][:id])
       status = "【#{tweet.username}】さんが『#{tweet.title}』を達成できま"
@@ -26,13 +26,13 @@ class Api::V1::BotController < ApplicationController
       else
         status += "せんでした。"
       end
-      #@client.update(status)
+      @client.update(status)
       tweet.if_finish = !tweet.if_finish
       tweet.save!
     end
   end
 
-  def set_twitter_bot
+  def set_bot
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key = "tsPRWGyiTjlg3HpXXU8YuN2CG"
       config.consumer_secret = "f1DLWH8TWoMjr81CsrxTipAvapJ3LCRW3y2cYa1vZu9civYOTW"

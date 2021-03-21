@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'top#index'
   
   # Chat
-  get   '/chat', to: 'top#index'
+  get  '/chat', to: 'top#index'
 
   # Session
   get '/logout', to: 'top#index'   
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   # Checklist
   get '/checklist', to: 'top#index'
-
+  
   namespace :api do
     namespace :v1 do
       resources :sessions, only: :create 
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       get :logged_in, to: "sessions#logged_in"
 
       resources :checklists, only: [ :index, :create ]
+
+      resources :bot, only: [ :index, :create ]  
     end
   end
 end
