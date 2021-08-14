@@ -1,7 +1,6 @@
 import React from "react";
 import Todo from "./Todo";
 import { makeStyles } from "@material-ui/core";
-import {RemoveScrollBar} from 'react-remove-scroll-bar';
 const useStyles = makeStyles(() => ({
   wrapper: {
     height: "380px",

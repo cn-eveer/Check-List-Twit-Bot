@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { store, history } from "./components/redux/store";
 import { ConnectedRouter } from "connected-react-router";
-import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,4 +15,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#root'),
   );
 });
-reportWebVitals();
